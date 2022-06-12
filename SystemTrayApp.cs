@@ -56,8 +56,20 @@ public class SystemTrayApp
             });
         MenuStrip.Items.Add(_currentSpeedLabel);
         MenuStrip.Items.Add(new ToolStripSeparator());
+
+        int longestWidth = 0;
+        foreach (object item in MenuStrip.Items)
+        {
+            longestWidth = Math.Max(longestWidth, (item as ToolStripItem)!.Width);
+        }
         MenuStrip.Items.Add(
-            new ToolStripButton("Exit", null, (_, _) => Exit(-1)) {DisplayStyle = ToolStripItemDisplayStyle.Text});
+            new ToolStripButton("Exit", null, (_, _) => Exit(-1))
+            {
+                DisplayStyle = ToolStripItemDisplayStyle.Text,
+                AutoSize = false,
+                Width = longestWidth,
+                TextAlign = ContentAlignment.MiddleLeft
+            });
 
         TrayIcon.ContextMenuStrip = MenuStrip;
         TrayIcon.Visible = true;
