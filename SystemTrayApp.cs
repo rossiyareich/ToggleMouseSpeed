@@ -109,6 +109,8 @@ public class SystemTrayApp
             throw new Exception("Key does not exist in Keys");
         }
 
+        if (keyCombination == Keys.None) throw new Exception("Key is empty");
+
         return keyCombination;
     }
 
